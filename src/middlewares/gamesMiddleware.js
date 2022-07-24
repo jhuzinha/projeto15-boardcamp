@@ -20,8 +20,5 @@ export async function validateGames(req, res, next) {
         next();  
     } catch (err) {
         res.sendStatus(500);
-
     }
-
-
 }
