@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createClients, getClients, updateClients, getClientsByID } from '../controllers/clientsControllers';
+import { createClients, getClients, updateClients, getClientsByID } from '../controllers/clientsControllers.js';
 
 const clients = Router();
 

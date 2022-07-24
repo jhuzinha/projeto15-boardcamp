@@ -1,4 +1,4 @@
-import connection from "../database";
+import connection from "../database.js";
 
 export async function createGames() {
 
