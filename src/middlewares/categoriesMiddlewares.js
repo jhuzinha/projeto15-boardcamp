@@ -1,9 +1,9 @@
-import categoriesSchema from "../schemas/categoriesSchema.js";
+import nameSchema from "../schemas/nameSchema.js";
 import connection from "../database.js";
 
 export async function validateCategories(req, res, next) {
     const name = req.body;
-    const validation = categoriesSchema.validate(name);
+    const validation = nameSchema.validate(name);
     if (validation.error) {
         return res.sendStatus(400);
     }
