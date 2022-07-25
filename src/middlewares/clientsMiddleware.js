@@ -3,9 +3,9 @@ import clientSchema from "../schemas/clientsSchema.js";
 
 export async function validateClient(req, res, next) {
     const newClient = req.body;
-    const validation = clientSchema.validate(newClient);
+    const validation = clientSchema.validate(newClient, { abortEarly: false });
     if (validation.error) {
-        return res.sendStatus(400);
+        return res.status(400).send(validation.error);
     }
     try {   
         const ExistingClient = await connection.query(`SELECT * FROM customers WHERE cpf = $1`, [newClient.cpf])

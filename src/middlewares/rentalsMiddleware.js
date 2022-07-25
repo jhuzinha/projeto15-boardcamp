@@ -28,3 +28,35 @@ export async function validateRental(req, res, next) {
         res.sendStatus(500);
     }
 }
+
+export async function validateFinalizeRental(req, res, next){
+    const id = req.params.id;
+
+    try {
+       const verifyId = await connection.query(`SELECT * FROM rentals WHERE id = $1 AND "returnDate" is null`, [id])
+       console.log(verifyId.rows)
+       if (!verifyId.rows[0]) {
+            return res.sendStatus(400)
+       }
+       next();
+
+    } catch(err) {
+        res.sendStatus(500)
+    }
+
+}
+
+
+export async function validateDeleteRental(req, res, next){
+    const id = req.params.id;
+    try {
+        const verifyId = await connection.query(`SELECT * FROM rentals WHERE id = $1 AND "returnDate" is not null`, [id])
+        if (!verifyId.rows[0]) {
+            return res.sendStatus(400)
+        }
+        next();
+ 
+     } catch(err) {
+         res.sendStatus(500)
+     }
+}

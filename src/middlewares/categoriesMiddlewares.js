@@ -3,9 +3,9 @@ import connection from "../database.js";
 
 export async function validateCategories(req, res, next) {
     const name = req.body;
-    const validation = nameSchema.validate(name);
+    const validation = nameSchema.validate(name, { abortEarly: false });
     if (validation.error) {
-        return res.sendStatus(400);
+        return res.status(400).send(validation.error);
     }
     try {
         const verifyExisting = await connection.query(`SELECT * FROM categories WHERE name = $1`, [ name.name ])
